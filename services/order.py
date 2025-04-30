@@ -9,6 +9,9 @@ def create_order(tickets: List[Dict], username: str, date: str = None):
         order = Order.objects.create(user=user)
         if date:
             order.created_at = date
+
+        order.save()
+
         for ticket in tickets:
             Ticket.objects.create(
                 order=order,

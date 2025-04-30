@@ -64,7 +64,7 @@ class Order(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.DO_NOTHING)
 
     def __str__(self) -> str:
-        return f"Order: {self.created_at.strftime("%d/%m/%Y %H:%M:%S")}"
+        return f"Order: {self.created_at.strftime('%d/%m/%Y %H:%M:%S')}"
 
 
 class Ticket(models.Model):
