@@ -1,12 +1,14 @@
 from django.db import transaction
-from db.models import MovieSession, Ticket, User, Order
+from db.models import Ticket, User, Order
 from typing import List, Dict
 
 
 def create_order(tickets: List[Dict], username: str, date: str = None):
     with transaction.atomic():
         user = User.objects.get(username=username)
-        order = Order.objects.create(user=user, created_at=date)
+        order = Order.objects.create(user=user)
+        if date:
+            user.creation_date = date
         for ticket in tickets:
             Ticket.objects.create(
                 order=order,
@@ -17,4 +19,4 @@ def create_order(tickets: List[Dict], username: str, date: str = None):
 
 
 def get_orders(username: str):
-    return Order.objects.filter(username__contains=username).order_by('-id')
+    return Order.objects.filter(user__username__contains=username).order_by('-id')

@@ -94,7 +94,7 @@ class Ticket(models.Model):
         if not (1 <= self.row <= self.movie_session.cinema_hall.rows):
             raise ValidationError(
                 {"row": f"Row must be between 1 and "
-                        f"{self.movie_session.cinema_hall.seats_in_row}, not {self.row}"
+                        f"{self.movie_session.cinema_hall.rows}, not {self.row}"
                  }
             )
 
